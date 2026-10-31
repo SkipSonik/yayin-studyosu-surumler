@@ -8,9 +8,9 @@
 (function () {
   var qs = new URLSearchParams(location.search);
   var state = qs.get('state') || new URLSearchParams(location.hash.slice(1)).get('state') || '';
-  var m = /^([pt])(\d{2,5})-/.exec(state);
+  var m = /^([ptb])(\d{2,5})-/.exec(state);
   var port = m ? m[2] : '3017';
-  var path = m && m[1] === 't' ? 'tiktok' : 'facebook';
+  var path = m && m[1] === 't' ? 'tiktok' : m && m[1] === 'b' ? 'ttbiz' : 'facebook';
   var to = 'http://localhost:' + port + '/auth/' + path + '/callback' + location.search + location.hash;
   document.getElementById('m').innerHTML = 'Yayın Stüdyosu\'na geri dönülüyor… Olmazsa <a href="' + to.replace(/"/g, '&quot;') + '">buraya tıkla</a> (uygulama açık olmalı).';
   location.replace(to);
